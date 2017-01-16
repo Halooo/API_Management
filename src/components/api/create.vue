@@ -1,134 +1,140 @@
 <template>
 	<div>
 		<div class="m-middle">
-			<div class="detail">
-				<div class="item">
-					<p class="title"># API Name</p>
-					<div class="main_form">
-						<span class="iconfont required">&#xe600;</span>
-						<input type="text" placeholder="Please enter API Name" v-modal="apiDetail.name"></input>
-					</div>
-				</div>
-				<div class="item">
-					<p class="title"># API description</p>
-					<div class="main_form">
-						<textarea maxlength="200" placeholder="Please enter API description" v-modal="apiDetail.descr"></textarea>
+			<div>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class="grid-content"># API Name</div></el-col>
+					<el-col :span="16">
+						<div class="grid-content">
+							<el-input type="text" placeholder="Please enter API Name" v-model="apiDetail.name"></el-input>
+						</div>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># API description</div></el-col>
+					<el-col :span="16">
+						<el-input type="textarea" autosize maxlength="200" placeholder="Please enter API description" v-model="apiDetail.descr"></el-input>
 						<div class="char_num">/200</div>
-					</div>
-				</div>
-				<div class="item" >
-					<p class="title"># Creator</p>
-					<div class="main_form">
-						<input type="text" disabled="disabled" v-modal="apiDetail.creator"></input>
-					</div>
-				</div>
-				<div class="item" >
-					<p class="title"># Last Time Edited</p>
-					<div class="main_form">
-						<input type="text" disabled="disabled" v-modal="apiDetail.modify_time"></input>
-					</div>
-				</div>
-				<!--<div class="item" >-->
-				<!--<p class="title"># Project</p>-->
-				<!--<div class="main_form">-->
-				<!--<input type="text" disabled="disabled"></input>-->
+					</el-col>
+				</el-row>
+				<el-row >
+					<el-col :span="8" class="form-label"><div class=""># Creator</div></el-col>
+					<el-col :span="16">
+						<el-input type="text" disabled="disabled" v-model="apiDetail.creator"></el-input>
+					</el-col>
+				</el-row>
+				<el-row >
+					<el-col :span="8" class="form-label"><div class=""># Last Time Edited</div></el-col>
+					<el-col :span="16">
+						<el-input type="text" disabled="disabled" v-model="apiDetail.modify_time"></el-input>
+					</el-col>
+				</el-row>
+				<!--<el-row >-->
+				<!--<div class=""># Project</div>-->
+				<!--<el-col :span="16">-->
+				<!--<el-input type="text" disabled="disabled"></el-input>-->
 				<!--</div>-->
 				<!--</div>-->
-				<div class="item">
-					<p class="title"># URL</p>
-					<div class="main_form">
-						<span class="iconfont required">&#xe600;</span>
-						<input type="text" placeholder="Please Enter URL" v-modal="apiDetail.url"></input>
-					</div>
-				</div>
-				<div class="item">
-					<p class="title"># Request Method</p>
-					<div class="main_form">
-						<span class="iconfont required">&#xe600;</span>
-						<select v-modal="apiDetail.method">
-							<option value="get">GET</option>
-							<option value="post">POST</option>
-							<option value="put">PUT</option>
-							<option value="delete">DELETE</option>
-						</select>
-					</div>
-				</div>
-				<div class="item">
-					<p class="title"># finised</p>
-					<div class="main_form">
-						<select v-modal="apiDetail.finish">
-							<option value="0">No</option>
-							<option value="1">Yes</option>
-						</select>
-					</div>
-				</div>
-				<div class="item">
-					<p class="title"># Request Params</p>
-					<a href="javascript:void(0)" class="add_new btn btn_sm btn_success" >Add One</a>
-					<div class="main_form full_width"  >
-						<input type="text" placeholder="Key" v-modal="apiDetail.reqparam.key">
-						<select v-modal="apiDetail.reqparam.type">
-							<option>Variable Type</option>
-							<option value="String">String</option>
-							<option value="Number">Number</option>
-							<option value="Boolean">Boolean</option>
-							<option value="Object">Object</option>
-							<option value="Array">Array</option>
-						</select>
-						<input type="text" placeholder="description" v-modal="apiDetail.reqparam.descr">
-						<select v-modal="apiDetail.reqparam.required">
-							<option value="0">Optional</option>
-							<option value="1">Required</option>
-						</select>
-						<span class="iconfont del" >&#xe607;</span>
-					</div>
-				</div>
-				<div class="item">
-					<p class="title"># Request Example</p>
-					<a href="javascript:void(0)" class="add_new btn btn_sm btn_success" >New</a>
-					<div class="main_form full_width"  >
-						<textarea placeholder="Please enter request example" v-modal="apiDetail.reqeg"></textarea>
-						<span class="iconfont del" >&#xe607;</span>
-					</div>
-				</div>
-				<div class="item">
-					<p class="title"># Return</p>
-					<a href="javascript:void(0)" class="add_new btn btn_sm btn_success" >New</a>
-					<div class="main_form full_width"  >
-						<input type="text" placeholder="Key" >
-						<select >
-							<option>Variable Type</option>
-							<option value="String">String</option>
-							<option value="Number">Number</option>
-							<option value="Boolean">Boolean</option>
-							<option value="Object">Object</option>
-							<option value="Array">Array</option>
-							<option value="Null">Null</option>
-						</select>
-						<input type="text" placeholder="description" >
-						<span class="iconfont del" >&#xe607;</span>
-					</div>
-				</div>
-				<div class="item">
-					<p class="title"># Response Example<span style="font-size: 12px;font-weight: normal;">(checked one will be the one returned)</span></p>
-					<a href="javascript:void(0)" class="add_new btn btn_sm btn_success" >New</a>
-					<div class="main_form full_width"  >
-						<input type="checkbox"  >
-						<textarea placeholder="Please enter response example"  @blur="formatResExample($index)"></textarea>
-						<span class="iconfont del" >&#xe607;</span>
-					</div>
-				</div>
-				<div class="item">
-					<p class="title"># Notes: </p>
-					<div class="main_form default_char">
-						<textarea id="remark" placeholder="Please enter additional notes" style="height: 300px;" ></textarea>
-					</div>
-				</div>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># URL</div></el-col>
+					<el-col :span="16">
+
+						<el-input type="text" placeholder="Please Enter URL" v-model="apiDetail.url"></el-input>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># Request Method</div></el-col>
+					<el-col :span="16">
+
+						<el-select placeholder="Select" v-model="apiDetail.method">
+							<el-option value="get">GET</el-option>
+							<el-option value="post">POST</el-option>
+							<el-option value="put">PUT</el-option>
+							<el-option value="delete">DELETE</el-option>
+						</el-select>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># finised</div></el-col>
+					<el-col :span="16">
+						<el-select placeholder="Select" v-model="apiDetail.finish">
+							<el-option value="0">No</el-option>
+							<el-option value="1">Yes</el-option>
+						</el-select>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># Request Params</div>
+						<a href="javascript:void(0)" class="add_new btn btn_sm btn_success" >Add One</a>
+					</el-col>
+					<el-col :span="16"  >
+						<el-input type="text" placeholder="Key" v-model="apiDetail.reqparam.key"></el-input>
+						<el-select placeholder="Select" v-model="apiDetail.reqparam.type">
+							<el-option>Variable Type</el-option>
+							<el-option value="String">String</el-option>
+							<el-option value="Number">Number</el-option>
+							<el-option value="Boolean">Boolean</el-option>
+							<el-option value="Object">Object</el-option>
+							<el-option value="Array">Array</el-option>
+						</el-select>
+						<el-input type="text" placeholder="description" v-model="apiDetail.reqparam.descr"></el-input>
+						<el-select placeholder="Select" v-model="apiDetail.reqparam.required">
+							<el-option value="0">Optional</el-option>
+							<el-option value="1">Required</el-option>
+						</el-select>
+
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># Request Example</div>
+						<a href="javascript:void(0)" class="add_new btn btn_sm btn_success" >New</a>
+					</el-col>
+					<el-col :span="16">
+						<el-input type="textarea" autosize placeholder="Please enter request example" v-model="apiDetail.reqeg"></el-input>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># Response</div>
+						<a href="javascript:void(0)" class="add_new btn btn_sm btn_success" >New</a>
+					</el-col>
+					<el-col :span="16"  >
+						<el-input type="text" placeholder="Key" ></el-input>
+						<el-select placeholder="Select" >
+							<el-option>Variable Type</el-option>
+							<el-option value="String">String</el-option>
+							<el-option value="Number">Number</el-option>
+							<el-option value="Boolean">Boolean</el-option>
+							<el-option value="Object">Object</el-option>
+							<el-option value="Array">Array</el-option>
+							<el-option value="Null">Null</el-option>
+						</el-select>
+						<el-input type="text" placeholder="description" ></el-input>
+
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># Response Example<span style="font-size: 12px;font-weight: normal;"><br>(checked one will be the one returned)</span></div>
+						<a href="javascript:void(0)" class="add_new btn btn_sm btn_success" >New</a>
+					</el-col>
+					<el-col :span="16"  >
+						<el-input type="checkbox"  ></el-input>
+						<el-input type="textarea" autosize placeholder="Please enter response example"  @blur="formatResExample($index)"></el-input>
+					</el-col>
+				</el-row>
+				<el-row>
+					<el-col :span="8" class="form-label"><div class=""># Notes: </div></el-col>
+					<el-col :span="16"  >
+						<el-input type="textarea" autosize id="remark" placeholder="Please enter additional notes" style="height: 300px;" ></el-input>
+					</el-col>
+				</el-row>
 			</div>
 		</div>
 	</div>
 </template>
 <style>
+	.form-label {
+		text-align: right;
+	}
 </style>
 <script type="text/babel">
 	export default{
