@@ -1,16 +1,24 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+	<div id="app">
+		<nav>
+			<NavTop></NavTop>
+			<NavSide></NavSide>
+		</nav>
+		<router-view></router-view>
+	</div>
 </template>
 
 <script>
 import Hello from './components/Hello';
+import NavTop from './components/common/nav-top.vue';
+import NavSide from './components/common/nav-side.vue';
 
 export default {
   name: 'app',
   components: {
     Hello,
+    NavTop,
+    NavSide
   }
 }
 </script>

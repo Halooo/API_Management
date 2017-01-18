@@ -6,15 +6,17 @@ const co = require('co');
 const convert = require('koa-convert');
 const json = require('koa-json');
 const onerror = require('koa-onerror');
-const bodyparser = require('koa-bodyparser')();
+const bodyparser = require('koa-body')();
 const logger = require('koa-logger');
+// const cors = require('koa-cors');
+const cors = require('kcors');
 
+const api = require('./routes/api');
 const index = require('./routes/index');
 const users = require('./routes/users');
 const create = require('./routes/create');
 
 // middlewares
-app.use(convert(bodyparser));
 app.use(convert(json()));
 app.use(convert(logger()));
 app.use(require('koa-static')(__dirname + '/public'));
@@ -31,9 +33,13 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
+// cors
+app.use(cors());
+
 router.use('/', index.routes(), index.allowedMethods());
 router.use('/users', users.routes(), users.allowedMethods());
 router.use('/create', create.routes(), create.allowedMethods());
+router.use('/api', api.routes(), api.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
 // response
